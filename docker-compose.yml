@@ -1,11 +1,22 @@
 version: "2"
 services:
+  frontend:
+    image: semtech/ember-proxy-service:1.1.0
+    volumes:
+      - ./client/dist:/app
+      - ./config/spa-proxy:/config
+    links:
+      - identifier:backend
+    ports:
+      - "80:80"
+    environment:
+      VIRTUAL_HOST: "mu.semte.ch"
+      LETSENCRYPT_HOST: "mu.semte.ch"
+      LETSENCRYPT_EMAIL: "madnificent@gmail.com"
   identifier:
     image: semtech/mu-identifier:1.0.0
     links:
       - dispatcher:dispatcher
-    ports:
-      - "80:80"
   dispatcher:
     image: semtech/mu-dispatcher:1.0.1
     links:
