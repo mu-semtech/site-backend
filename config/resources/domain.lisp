@@ -8,6 +8,9 @@
   :has-many `((menu :via ,(s-prefix "cms:hasMenu")
                     :as "menus"))
   :resource-base (s-url "http://mu.semte.ch/vocabulary/cms/menu-holders/")
+  :authorization (list :update (s-prefix "auth:update")
+                       :create (s-prefix "auth:create")
+                       :delete (s-prefix "auth:delete"))
   :on-path "menu-holders")
 
 (define-resource menu ()
@@ -25,6 +28,9 @@
                           :inverse t
                           :as "menu-holder"))
   :resource-base (s-url "http://mu.semte.ch/vocabulary/cms/menus/")
+  :authorization (list :update (s-prefix "auth:update")
+                       :create (s-prefix "auth:create")
+                       :delete (s-prefix "auth:delete"))
   :on-path "menus")
 
 ;; (define-resource page ()
@@ -34,6 +40,9 @@
 ;;                     :inverse t
 ;;                     :as "menus"))
 ;;   :resource-base (s-url "http://mu.semte.ch/vocabulary/cms/pages/")
+;;   :authorization (list :update (s-prefix "auth:update")
+;;                      :create (s-prefix "auth:create")
+;;                      :delete (s-prefix "auth:delete"))
 ;;   :on-path "pages")
 
 (define-resource page ()
@@ -44,4 +53,7 @@
                 (:order :number ,(s-prefix "cms:menuOrder"))
                 (:content :string ,(s-prefix "cms:pageContent"))
                 (:slug :string ,(s-prefix "cms:slug")))
+  :authorization (list :update (s-prefix "auth:update")
+                       :create (s-prefix "auth:create")
+                       :delete (s-prefix "auth:delete"))
   :on-path "pages")
