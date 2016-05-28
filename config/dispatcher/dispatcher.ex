@@ -13,6 +13,18 @@ defmodule Dispatcher do
   plug :match
   plug :dispatch
 
+  match "/export/*path" do
+    Proxy.forward conn, path, "http://export/"
+  end
+
+  match "/menu-holders/*path" do
+    Proxy.forward conn, path, "http://resource/menu-holders/"
+  end
+
+  match "/menus/*path" do
+    Proxy.forward conn, path, "http://resource/menus/"
+  end
+
   match "/pages/*path" do
     Proxy.forward conn, path, "http://resource/pages/"
   end
